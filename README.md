@@ -3,12 +3,12 @@
 -->
 # cat-decorators
 
+`cat-decorators` is a helper element that allows you to decorate Polymer elements.
+
 includes:
 `cat-border`
 `cat-shadow`
 `cat-position`
-
-`cat-decorators` is a helper element that allows you to decorate Polymer elements.
 
 ## Demo
 
@@ -62,7 +62,7 @@ Or [download as ZIP](https://github.com/the-catalin/cat-decorators/archive/maste
 4. Initialize an element with a desired decorators:
 
 	```js
-	this.decorators({
+	this.addDecorator({
 	    name: 'cat-border',
 		node: this,
 		color: '#777',
