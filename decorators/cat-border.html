@@ -1,0 +1,60 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-decorator-behavior.html">
+
+<script>
+
+	Polymer({
+
+		is: 'cat-border',
+
+		behaviors: [Polymer.CatDecoratorBehavior],
+
+		properties: {
+			_defaults : {
+				value: {
+					style: 'solid',
+					width: 2,
+					color: '#777',
+					side: 'all',
+					radius: 0
+				}
+			},
+			_restrictions: {
+				value: {
+					style: ['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'],
+					width: 'number',
+					color: 'color',
+					side: ['all', 'left', 'right', 'top', 'bottom'],
+					radius: 'number'
+				}
+			}
+		},
+
+		capitalize: function(string) {
+		    return string.charAt(0).toUpperCase() + string.slice(1);
+		},
+
+		_customInit: function() {
+
+			this._config.node.style.boxSizing = 'border-box';
+			this._config.node.style.overflow = 'hidden';
+
+			if (this._config.side === 'all') {
+				this._config.node.style.borderStyle = this._config.style;
+				this._config.node.style.borderWidth = this._config.width + 'px';
+				this._config.node.style.borderColor = this._config.color;
+				this._config.node.style.borderRadius = this._config.radius + 'px';
+			} else {
+				this._config.node.style['border' + this.capitalize(this._config.side) + 'Style'] = this._config.style;
+				this._config.node.style['border' + this.capitalize(this._config.side) + 'Width'] = this._config.width + 'px';
+				this._config.node.style['border' + this.capitalize(this._config.side) + 'Color'] = this._config.color;
+				this._config.node.style.borderRadius = this._config.radius + 'px';
+			}
+			
+		}
+		
+
+	});
+
+</script>

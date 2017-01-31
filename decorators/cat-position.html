@@ -1,0 +1,72 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-decorator-behavior.html">
+
+<script>
+
+	Polymer({
+
+		is: 'cat-position',
+
+		behaviors: [Polymer.CatDecoratorBehavior],
+
+		properties: {
+			_defaults : {
+				value: {
+					horizontal: 'random',
+					vertical: 'random',
+					padding: 20
+				}
+			},
+			_restrictions: {
+				value: {
+					horizontal: ['left', 'right', 'center', 'random'],
+					vertical: ['top', 'bottom', 'center', 'random'],
+					padding: 'number'
+				}
+			}
+		},
+
+		_customInit: function() {
+
+			this._config.node.style.position = 'absolute';
+
+			if (this._config.horizontal === 'random') {
+			    this._config.horizontal = this._restrictions.horizontal[Math.floor(Math.random() * 3)];
+			}
+			if (this._config.vertical === 'random') {
+			    this._config.vertical = this._restrictions.vertical[Math.floor(Math.random() * 3)];
+			}
+
+			if (this._config.horizontal === 'right') {
+			    this._config.node.style.right = 0;
+			    this._config.node.style.textAlign = 'right';
+			} else if (this._config.horizontal === 'center') {
+			    this._config.node.style.left = 0;
+			    this._config.node.style.right = 0;
+			    this._config.node.style.marginLeft = 'auto';
+			    this._config.node.style.marginRight = 'auto';
+			    this._config.node.style.textAlign = 'center';
+			} else if (this._config.horizontal === 'left') {
+				this._config.node.style.left = 0;
+			    this._config.node.style.textAlign = 'left';
+			}
+
+			if (this._config.vertical === 'bottom') {
+			    this._config.node.style.bottom = 0;
+			    this._config.node.style.top = 'auto';
+			} else if (this._config.vertical === 'center') {
+			    this._config.node.style.top = '50%';
+			    this._config.node.style.transform = 'translate(0, -50%)';
+			} else if (this._config.vertical === 'top') {
+				this._config.node.style.top = 0;
+				this._config.node.style.bottom = 'auto';
+			}
+
+			this._config.node.style.padding = this._config.padding + 'px';
+		}
+		
+
+	});
+
+</script>

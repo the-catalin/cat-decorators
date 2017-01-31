@@ -1,0 +1,50 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-decorator-behavior.html">
+
+<script>
+
+	Polymer({
+
+		is: 'cat-shadow',
+
+		behaviors: [Polymer.CatDecoratorBehavior],
+
+		properties: {
+			_defaults : {
+				value: {
+					horizontalWidth: 2,
+					verticalWidth: 2,
+					blur: 10,
+					spread: 0,
+					color: '#000',
+					inset: false
+				}
+			},
+			_restrictions: {
+				value: {
+					horizontalWidth: 'number',
+					verticalWidth: 'number',
+					blur: 'number',
+					spread: 'number',
+					color: 'color',
+					inset: 'boolean'
+				}
+			}
+		},
+
+		_customInit: function() {
+			
+			this._config.node.style.boxShadow = this._config.horizontalWidth + 'px ' +
+				this._config.verticalWidth + 'px ' +
+				this._config.blur + 'px ' +
+				this._config.spread + 'px ' +
+				this._config.color + 
+				(this._config.inset ? ' inset' : '');
+
+		}
+		
+
+	});
+
+</script>
