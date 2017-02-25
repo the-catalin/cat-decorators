@@ -2,22 +2,25 @@
 
 <script>
 
-	Polymer.CatDecoratorRunnerBehavior = {
 
-		addDecorator: function(config) {
-			
-			var catDecorator = document.createElement(config.name);
-			
-			if (catDecorator.initConfig) {
-				catDecorator.initConfig(config);
-				config.catDecorator = catDecorator;
-			} else {
-				console.warn('There is no decorator with this name: "' + config.name + '"');
-			}			
+window.CatBehaviors = window.CatBehaviors || {};
+/** @polymerBehavior */
+CatBehaviors.CatDecoratorRunnerBehavior = {
 
-		}
+	addDecorator: function(config) {
 		
+		var catDecorator = document.createElement(config.name);
+		
+		if (catDecorator.initConfig) {
+			catDecorator.initConfig(config);
+			config.catDecorator = catDecorator;
+		} else {
+			console.warn('There is no decorator with this name: "' + config.name + '"');
+		}			
 
-	};
+	}
+	
+
+};
 
 </script>
