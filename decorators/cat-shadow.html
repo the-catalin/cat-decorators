@@ -18,7 +18,8 @@
 					blur: 10,
 					spread: 0,
 					color: '#000',
-					inset: false
+					inset: false,
+					double: false
 				}
 			},
 			_restrictions: {
@@ -28,19 +29,32 @@
 					blur: 'number',
 					spread: 'number',
 					color: 'color',
-					inset: 'boolean'
+					inset: 'boolean',
+					double: 'boolean'
 				}
 			}
 		},
 
 		_customInit: function() {
-			
-			this._config.node.style.boxShadow = this._config.horizontalWidth + 'px ' +
+			var shadowString = this._config.horizontalWidth + 'px ' +
 				this._config.verticalWidth + 'px ' +
 				this._config.blur + 'px ' +
 				this._config.spread + 'px ' +
 				this._config.color + 
 				(this._config.inset ? ' inset' : '');
+
+			if (this._config.double) {
+				shadowString += ', ' +
+					(- this._config.horizontalWidth) + 'px ' +
+					(- this._config.verticalWidth) + 'px ' +
+					this._config.blur + 'px ' +
+					this._config.spread + 'px ' +
+					this._config.color + 
+					(this._config.inset ? ' inset' : '');
+
+			}
+
+			this._config.node.style.boxShadow = shadowString;
 
 		}
 		
